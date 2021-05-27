@@ -28,6 +28,15 @@ class GroupUser:
         self.identifier = identifier
         self.principal_type = principal_type
 
+    @classmethod
+    def from_dict(cls, dictionary):
+        """
+        Creates a user from a dictionary
+        :param dictionary: The dictionary to create a user from
+        :return: The created dictionary
+        """
+        return GroupUser(str(dictionary[cls.group_user_access_right_key]), str(dictionary[cls.email_address_key]), str(dictionary[cls.display_name_key]), str(dictionary[cls.identifier_key]), str(dictionary[cls.principal_type_key]))
+
     def as_set_values_dict(self):
         """Convert GroupUser object to dict with only values that are actually set. This dict can be used for
         groups.add_group_user requests.
@@ -52,3 +61,6 @@ class GroupUser:
             group_user_dict[self.principal_type_key] = self.principal_type.value
 
         return group_user_dict
+
+    def __repr__(self):
+        return f'<GroupUser {str(self.__dict__)}>'
